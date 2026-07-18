@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<title>代码开源 - DOSOI</title>
+<style>
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI";background:#0b0f1a;color:#e5e7eb;}
+header{padding:24px 40px;border-bottom:1px solid #1f2937;}
+header a{color:#38bdf8;text-decoration:none;}
+main{max-width:960px;margin:32px auto;padding:0 24px;}
+.card{background:#111827;border:1px solid #374151;border-radius:10px;padding:20px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;}
+.card span{color:#9ca3af;font-size:13px;}
+.btn{padding:8px 14px;background:#2563eb;color:#fff;border-radius:8px;text-decoration:none;}
+.empty{text-align:center;color:#6b7280;padding:60px 0;}
+</style>
+</head>
+<body>
+
+<header><a href="index.html">← DOSOI</a> / 代码开源</header>
+
+<main id="list">
+  <div class="empty">暂无文件，请在 downloads/ 上传压缩包并在 manifest.json 中添加条目。</div>
+</main>
+
+<script>
+fetch("downloads/manifest.json")
+.then(r=>r.json())
+.then(files=>{
+  const list=document.getElementById("list");
+  if(!files.length){return;}
+  list.innerHTML="";
+  files.forEach(f=>{
+    list.innerHTML+=`
+    <div class="card">
+      <div>
+        ${f.icon||"📦"} <strong>${f.name}</strong><br>
+        <span>版本：${f.version} · ${f.size} · ${f.date}</span>
+      </div>
+      <a class="btn" href="downloads/${encodeURIComponent(f.name)}" download>⬇ 下载</a>
+    </div>`;
+  });
+});
+</script>
+
+</body>
+</html>
