@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<title>帮助中心 - DOSOI</title>
+<style>
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI";background:#0b0f1a;color:#e5e7eb;}
+header{padding:24px 40px;border-bottom:1px solid #1f2937;}
+header a{color:#38bdf8;text-decoration:none;}
+.container{max-width:960px;margin:32px auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+textarea{height:520px;background:#111827;color:#e5e7eb;border:1px solid #374151;border-radius:8px;padding:16px;resize:vertical;}
+.preview{background:#111827;border:1px solid #374151;border-radius:8px;padding:16px;overflow:auto;}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+
+<header><a href="index.html">← DOSOI</a> / 帮助中心</header>
+
+<div class="container">
+  <textarea id="md">
+# 帮助中心
+
+<details>
+<summary>如何使用？</summary>
+
+这里写说明内容。
+
+</details>
+  </textarea>
+  <div class="preview" id="preview"></div>
+</div>
+
+<script>
+const md=document.getElementById("md");
+const preview=document.getElementById("preview");
+preview.innerHTML=marked.parse(md.value);
+md.addEventListener("input",()=>{
+  preview.innerHTML=marked.parse(md.value);
+});
+</script>
+
+</body>
+</html>
